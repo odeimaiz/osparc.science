@@ -7,8 +7,8 @@ function create_image(src, width, height, alt) {
     return img;
 }
 
-const header = create_image("/resources/header.png");
+const header = create_image("../resources/header.png");
 document.body.appendChild(header);
 
-const footer = create_image("/resources/footer.png");
+const footer = create_image("../resources/footer.png");
 document.body.appendChild(footer);
