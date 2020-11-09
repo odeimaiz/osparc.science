@@ -40,7 +40,7 @@ function populateTable(tbl, data) {
                                 const linkText = document.createTextNode(rowData[j]);
                                 a.appendChild(linkText);
                                 a.title = rowData[j];
-                                a.href = "http://example.com";
+                                a.href = url;
                                 td.appendChild(a);
                             })
                             .catch(() => console.error("Can’t access " + url));
