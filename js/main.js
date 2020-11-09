@@ -23,6 +23,14 @@ function createTable() {
     return tbl;
 }
 
+function getDownloadLinkFromBF(uriField) {
+    // "uri":"s3://blackfynn-discover-use1/84/1/files/template.json"
+    // key: 84/1/files/template.json
+    const key = uriField.replace("s3://blackfynn-discover-use1/", "");
+    const url = "https://api.sparc.science/download?key=" + key;
+    return fetch(url);
+}
+
 function populateTable(tbl, data) {
     const tbdy = document.createElement("tbody");
     for (let i=0; i<data.length; i++) {
@@ -38,6 +46,17 @@ function populateTable(tbl, data) {
 
         const td2 = tr.insertCell(2);
         td2.appendChild(document.createTextNode(rowData["size"] + " B"));
+
+        getDownloadLinkFromBF(rowData["uri"])
+            .then(responseDL => {
+                console.log(responseDL);
+                responseDL.text()
+                    .then(downloadLink => {
+                        console.log(downloadLink);
+                    })
+                    .catch(err => console.error("Can’t access json", err));
+            })
+            .catch(() => console.error("Can’t access BF"));
 
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
         const url = "https://staging.osparc.io/v0/";
