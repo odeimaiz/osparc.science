@@ -28,15 +28,19 @@ function populateTable(tbl, data) {
         const tr = tbl.insertRow();
         for (let j=0; j<4; j++) {
             if (j===3) {
-                fetch("https://staging.osparc.io/")
+                const proxyurl = "https://cors-anywhere.herokuapp.com/";
+                const url = "https://staging.osparc.io/v0/";
+                fetch(proxyurl + url)
                     .then(response => {
-                        console.log(response);
-                        const td = tr.insertCell();
-                        td.appendChild(document.createTextNode(rowData[j]));
+                        response.json()
+                            .then(resp => {
+                                console.log(resp);
+                                const td = tr.insertCell();
+                                td.appendChild(document.createTextNode(rowData[j]));
+                            })
+                            .catch(() => console.error("Can’t access " + url));
                     })
-                    .catch(err => {
-                        console.error(err);
-                    });
+                    .catch(() => console.error("Can’t access proxy"));
             } else {
                 const td = tr.insertCell();
                 td.appendChild(document.createTextNode(rowData[j]));
