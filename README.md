@@ -1,3 +1,3 @@
 # osparc.science
 
-[osparc.science](http://osparc.science.github.io)
+[osparc.science](https://odeimaiz.github.io/osparc.science/)
