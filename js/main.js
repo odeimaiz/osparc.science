@@ -36,7 +36,12 @@ function populateTable(tbl, data) {
                             .then(resp => {
                                 console.log(resp);
                                 const td = tr.insertCell();
-                                td.appendChild(document.createTextNode(rowData[j]));
+                                const a = document.createElement("a");
+                                const linkText = document.createTextNode(rowData[j]);
+                                a.appendChild(linkText);
+                                a.title = rowData[j];
+                                a.href = "http://example.com";
+                                td.appendChild(a);
                             })
                             .catch(() => console.error("Can’t access " + url));
                     })
@@ -59,7 +64,7 @@ const filesTable = createTable();
 document.body.appendChild(filesTable);
 
 const tableData = [
-    ["template.json", "Json", "51B", "Open"]
+    ["template.json", "Json", "51B", "Open in oSparc"]
 ];
 populateTable(filesTable, tableData);
 
