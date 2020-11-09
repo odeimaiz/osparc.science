@@ -46,7 +46,11 @@ function populateTable(tbl, data) {
                                 a.href = url;
                                 td.appendChild(a);
                             })
-                            .catch(() => console.error("Can’t access " + url));
+                            .catch(() => {
+                                console.error("Can’t access " + url);
+                                const td = tr.insertCell();
+                                td.appendChild(document.createTextNode("-"));
+                            });
                     })
                     .catch(() => console.error("Can’t access proxy"));
             } else {
