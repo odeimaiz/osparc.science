@@ -103,8 +103,7 @@ const tableData = [
         "packageType":"Unsupported",
         "sourcePackageId":"N:package:98757b39-b18e-4940-82f3-f84b4856fce3",
         "createdAt":null,
-        "type":"File",
-        "downloadUrl": "https://blackfynn-discover-use1.s3.amazonaws.com/84/1/files/template.json?AWSAccessKeyId=AKIAQNJEWKCFAOLGQTY6&Signature=8XQoMGyMXZ66h1SgUu4ZdnM5JGc%3D&x-amz-request-payer=requester&Expires=1604931672"
+        "type":"File"
     }
 ];
 populateTable(filesTable, tableData);
