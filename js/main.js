@@ -30,12 +30,14 @@ function populateTable(tbl, data) {
         const tr = tbl.insertRow();
         tr.style.textAlign = "left";
         
-        let td = tr.insertCell(0);
-        td.appendChild(document.createTextNode(rowData["name"]));
-        td = tr.insertCell(1);
-        td.appendChild(document.createTextNode(rowData["fileType"]));
-        td = tr.insertCell(2);
-        td.appendChild(document.createTextNode(rowData["size"] + " B"));
+        const td0 = tr.insertCell(0);
+        td0.appendChild(document.createTextNode(rowData["name"]));
+
+        const td1 = tr.insertCell(1);
+        td1.appendChild(document.createTextNode(rowData["fileType"]));
+
+        const td2 = tr.insertCell(2);
+        td2.appendChild(document.createTextNode(rowData["size"] + " B"));
 
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
         const url = "https://staging.osparc.io/v0/";
@@ -44,19 +46,15 @@ function populateTable(tbl, data) {
                 response.json()
                     .then(resp => {
                         console.log(resp);
-                        td = tr.insertCell(3);
+                        const td3 = tr.insertCell(3);
                         const a = document.createElement("a");
                         const linkText = document.createTextNode("Open in oSparc");
                         a.appendChild(linkText);
                         a.title = "Open in oSparc";
                         a.href = url;
-                        td.appendChild(a);
+                        td3.appendChild(a);
                     })
-                    .catch(() => {
-                        console.error("Can’t access " + url);
-                        const td = tr.insertCell();
-                        td.appendChild(document.createTextNode("-"));
-                    });
+                    .catch(() => console.error("Can’t access " + url));
             })
             .catch(() => console.error("Can’t access proxy"));
 
