@@ -23,12 +23,24 @@ function createTable() {
 
 function populateTable(tbl, data) {
     const tbdy = document.createElement("tbody");
-    for (let i = 0; i < data.length; i++) {
+    for (let i=0; i<data.length; i++) {
         const rowData = data[i];
         const tr = tbl.insertRow();
-        for (let j = 0; j < 4; j++) {
-            const td = tr.insertCell();
-            td.appendChild(document.createTextNode(rowData[j]));
+        for (let j=0; j<4; j++) {
+            if (j===3) {
+                fetch("https://staging.osparc.io/")
+                    .then(response => {
+                        console.log(response);
+                        const td = tr.insertCell();
+                        td.appendChild(document.createTextNode(rowData[j]));
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            } else {
+                const td = tr.insertCell();
+                td.appendChild(document.createTextNode(rowData[j]));
+            }
         }
         tbdy.appendChild(tr);
     }
