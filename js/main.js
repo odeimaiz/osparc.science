@@ -9,10 +9,12 @@ function createImage(src, width, height, alt) {
 
 function createTable() {
     const tbl = document.createElement("table");
-    tbl.style.width = "100%";
+    tbl.style.width = "1200px";
+    tbl.style.marginLeft = "150px";
 
     const theader = tbl.createTHead();
     const header = theader.insertRow(0);
+    header.style.textAlign = "left";
     header.insertCell(0).innerHTML = "<b>Name</b>";
     header.insertCell(1).innerHTML = "<b>File type</b>";
     header.insertCell(2).innerHTML = "<b>Size</b>";
@@ -26,6 +28,7 @@ function populateTable(tbl, data) {
     for (let i=0; i<data.length; i++) {
         const rowData = data[i];
         const tr = tbl.insertRow();
+        tr.style.textAlign = "left";
         for (let j=0; j<4; j++) {
             if (j===3) {
                 const proxyurl = "https://cors-anywhere.herokuapp.com/";
