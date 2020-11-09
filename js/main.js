@@ -104,6 +104,30 @@ const tableData = [
         "sourcePackageId":"N:package:98757b39-b18e-4940-82f3-f84b4856fce3",
         "createdAt":null,
         "type":"File"
+    },
+    {
+        "name": "subjects.xlsx",
+        "path": "files/subjects.xlsx",
+        "size": 50638,
+        "icon": "Excel",
+        "uri": "s3://blackfynn-discover-use1/32/3/files/subjects.xlsx",
+        "fileType": "MSExcel",
+        "packageType": "Unsupported",
+        "sourcePackageId": "N:package:daee8c23-7036-4ea6-a78c-18f7ac8fa962",
+        "createdAt": null,
+        "type": "File"
+    },
+    {
+        "name": "submission.xlsx",
+        "path": "files/submission.xlsx",
+        "size": 5975,
+        "icon": "Excel",
+        "uri": "s3://blackfynn-discover-use1/32/3/files/submission.xlsx",
+        "fileType": "MSExcel",
+        "packageType": "Unsupported",
+        "sourcePackageId": "N:package:a9332bb2-a234-438c-ac3e-851bc0e032ab",
+        "createdAt": null,
+        "type": "File"
     }
 ];
 populateTable(filesTable, tableData);
