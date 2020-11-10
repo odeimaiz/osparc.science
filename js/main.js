@@ -12,14 +12,17 @@ function createTable() {
     tbl.style.width = "1200px";
     tbl.style.marginLeft = "150px";
     tbl.style.borderSpacing = "12px";
+    tbl.style.textAlign = "left";
+    tbl.style.fontSize = "14px";
+    tbl.style.color = "#606266";
 
     const theader = tbl.createTHead();
     const header = theader.insertRow(0);
-    header.style.textAlign = "left";
-    header.insertCell(0).innerHTML = "<b>Name</b>";
-    header.insertCell(1).innerHTML = "<b>File type</b>";
-    header.insertCell(2).innerHTML = "<b>Size</b>";
-    header.insertCell(3).innerHTML = "<b>Operation</b>";
+    header.style.color = "#000000";
+    header.insertCell(0).innerHTML = "Name";
+    header.insertCell(1).innerHTML = "File type";
+    header.insertCell(2).innerHTML = "Size";
+    header.insertCell(3).innerHTML = "Operation";
 
     return tbl;
 }
@@ -37,9 +40,6 @@ function populateTable(tbl, data) {
     for (let i=0; i<data.length; i++) {
         const rowData = data[i];
         const tr = tbl.insertRow();
-        tr.style.textAlign = "left";
-        tr.style.color = "#606266";
-        tr.style.fontSize = "14px";
 
         const td0 = tr.insertCell(0);
         td0.appendChild(document.createTextNode(rowData["name"]));
