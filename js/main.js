@@ -11,6 +11,7 @@ function createTable() {
     const tbl = document.createElement("table");
     tbl.style.width = "1200px";
     tbl.style.marginLeft = "150px";
+    tbl.style.borderSpacing = "12px";
 
     const theader = tbl.createTHead();
     const header = theader.insertRow(0);
@@ -37,7 +38,9 @@ function populateTable(tbl, data) {
         const rowData = data[i];
         const tr = tbl.insertRow();
         tr.style.textAlign = "left";
-        
+        tr.style.color = "#606266";
+        tr.style.fontSize = "14px";
+
         const td0 = tr.insertCell(0);
         td0.appendChild(document.createTextNode(rowData["name"]));
 

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Asap&display=swap");
+
 html {
     display: table;
     margin: auto;
@@ -7,4 +9,5 @@ body {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
+    font-family: "Asap", sans-serif;
 }
