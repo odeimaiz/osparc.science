@@ -1,3 +1,5 @@
+OSPARC_SERVER = "http://localhost:9081/"
+
 function createImage(src, width, height, alt) {
     const img = document.createElement("img");
     img.src = src;
@@ -37,7 +39,19 @@ function getDownloadLinkFromBF(uriField) {
     return fetch(url);
 }
 
-function populateTable(tbl, data) {
+function getOsparcLink(redirection_url, downloadLink, fileName, fileSize) {
+    // http://127.0.0.1:9081/view?file_type=DICOM&file_size=1&file_name=foo&download_link=http%3A%2F%2Fhttpbin.org%2Fimage%2Fjpeg
+    let url = redirection_url + "&download_link=" + downloadLink;
+    if (fileName) {
+        url += "&file_name=" + fileName;
+    }
+    if (fileSize) {
+        url += "&file_size=" + fileSize;
+    }
+    return encodeURI(url);
+}
+
+function populateTable(tbl, supportedFileTypes, data) {
     const tbdy = document.createElement("tbody");
     for (let i=0; i<data.length; i++) {
         const rowData = data[i];
@@ -47,40 +61,23 @@ function populateTable(tbl, data) {
         td0.appendChild(document.createTextNode(rowData["name"]));
 
         const td1 = tr.insertCell(1);
-        td1.appendChild(document.createTextNode(rowData["fileType"]));
+        const fileType = rowData["fileType"];
+        td1.appendChild(document.createTextNode(fileType));
 
         const td2 = tr.insertCell(2);
         td2.appendChild(document.createTextNode(rowData["size"] + " B"));
 
-        getDownloadLinkFromBF(rowData["uri"])
-            .then(responseDL => {
-                console.log(responseDL);
-                responseDL.text()
-                    .then(downloadLink => {
-                        console.log(downloadLink);
-
-                        const proxyurl = "https://cors-anywhere.herokuapp.com/";
-                        const url = "https://staging.osparc.io/v0/";
-                        fetch(proxyurl + url)
-                            .then(response => {
-                                response.json()
-                                    .then(resp => {
-                                        console.log(resp);
-                                        const td3 = tr.insertCell(3);
-                                        const a = document.createElement("a");
-                                        const linkText = document.createTextNode("Open in oSparc");
-                                        a.appendChild(linkText);
-                                        a.title = "Open in oSparc";
-                                        a.href = url;
-                                        td3.appendChild(a);
-                                    })
-                                    .catch(() => console.error("Can’t access " + url));
-                            })
-                            .catch(() => console.error("Can’t access proxy"));
-                    })
-                    .catch(err => console.error("Can’t access text", err));
-            })
-            .catch(() => console.error("Can’t access BF"));
+        const found = supportedFileTypes.find(suppFileType => suppFileType.file_type === fileType);
+        if (found) {
+            const td3 = tr.insertCell(3);
+            const a = document.createElement("a");
+            const linkText = document.createTextNode("Open in oSparc");
+            a.appendChild(linkText);
+            a.title = "Open in oSparc";
+            a.href = getOsparcLink(found["redirection_url"], rowData["downloadURL"], rowData["name"], rowData["size"]);
+            a.target="_blank"
+            td3.appendChild(a);
+        }
 
         tbdy.appendChild(tr);
     }
@@ -93,11 +90,17 @@ document.body.appendChild(header);
 
 const filesTable = createTable();
 document.body.appendChild(filesTable);
-fetch('js/data.json')
-    .then(response => response.json())
+fetch('js/dataGH.json')
+    .then(respTD => respTD.json())
     .then(tableData => {
-        populateTable(filesTable, tableData);
-    });
+        // const file_types_url = OSPARC_SERVER + "v0/viewers/filetypes" // fix CORS issue
+        const file_types_url = 'js/filetypes.json'
+        fetch(file_types_url)
+            .then(respFT => respFT.json())
+            .then(filetypes => {
+                populateTable(filesTable, filetypes["data"], tableData);
+        });
+});
 
 
 const footer = createImage("resources/footer.png");
