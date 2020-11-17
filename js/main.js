@@ -41,7 +41,7 @@ function getDownloadLinkFromBF(uriField) {
 
 function getOsparcLink(redirection_url, downloadLink, fileName, fileSize) {
     // http://127.0.0.1:9081/view?file_type=DICOM&file_size=1&file_name=foo&download_link=http%3A%2F%2Fhttpbin.org%2Fimage%2Fjpeg
-    let url = redirection_url + "&download_link=" + downloadLink;
+    let url = redirection_url + "&download_link=" + encodeURIComponent(downloadLink);
     if (fileName) {
         url += "&file_name=" + fileName;
     }
