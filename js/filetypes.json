@@ -1,0 +1,12 @@
+{
+    "data": [{
+        "file_type": "DICOM",
+        "viewer_title": "Sim4life v1.0.16",
+        "redirection_url": "http://localhost:9081/view?file_type=DICOM"
+    }, {
+        "file_type": "CSV",
+        "viewer_title": "2d plot - rawgraphs v2.10.6",
+        "redirection_url": "http://localhost:9081/view?file_type=CSV"
+    }],
+    "error": null
+}
