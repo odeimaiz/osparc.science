@@ -67,16 +67,28 @@ function populateTable(tbl, supportedFileTypes, data) {
         const td2 = tr.insertCell(2);
         td2.appendChild(document.createTextNode(rowData["size"] + " B"));
 
-        const found = supportedFileTypes.find(suppFileType => suppFileType.file_type === fileType);
-        if (found) {
+        const results= supportedFileTypes.filter(suppFileType => suppFileType.file_type === fileType);
+        if (results) {
             const td3 = tr.insertCell(3);
-            const a = document.createElement("a");
-            const linkText = document.createTextNode("Open in oSparc");
-            a.appendChild(linkText);
-            a.title = "Open in oSparc";
-            a.href = getOsparcLink(found["redirection_url"], rowData["downloadURL"], rowData["name"], rowData["size"]);
-            a.target="_blank"
-            td3.appendChild(a);
+
+            const selectList = document.createElement("select");
+            selectList.id = "mySelect";
+            results.forEach(result => {
+                const option = document.createElement("option");
+                option.text = result["viewer_title"];
+                option.value = result["redirection_url"];
+                selectList.appendChild(option);
+            });
+
+            const button = document.createElement('button');
+            button.innerHTML = "Open in oSparc";
+            button.onclick = function() {
+                const url = getOsparcLink(selectList.value, rowData["downloadURL"], rowData["name"], rowData["size"]);
+                window.open(url, '_blank');
+            };
+
+            td3.appendChild(button);
+            td3.appendChild(selectList);
         }
 
         tbdy.appendChild(tr);
