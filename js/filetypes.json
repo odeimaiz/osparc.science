@@ -1,12 +1,16 @@
 {
     "data": [{
-        "file_type": "DICOM",
-        "viewer_title": "Sim4life v1.0.16",
-        "redirection_url": "https://osparc-master.speag.com/view?file_type=DICOM"
-    }, {
         "file_type": "CSV",
         "viewer_title": "2d plot - rawgraphs v2.11.0",
         "redirection_url": "https://osparc-master.speag.com/view?file_type=CSV"
+    }, {
+        "file_type": "CSV",
+        "viewer_title": "Sim4life v1.0.16",
+        "redirection_url": "https://osparc-master.speag.com/view?file_type=DICOM"
+    }, {
+        "file_type": "DICOM",
+        "viewer_title": "Sim4life v1.0.16",
+        "redirection_url": "https://osparc-master.speag.com/view?file_type=DICOM"
     }],
     "error": null
 }
