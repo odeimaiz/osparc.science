@@ -1,14 +1,14 @@
 [{
-    "name":"orchestra.json",
+    "name":"dispersions.csv",
     "fileType":"CSV",
     "size":4,
-    "downloadURL":"https://raw.githubusercontent.com/rawgraphs/raw/master/data/orchestra.csv"
+    "downloadURL":"https://raw.githubusercontent.com/rawgraphs/raw/master/data/dispersions.csv"
 },
 {
-    "name":"my.dicom",
+    "name":"000000.dcm",
     "fileType":"DICOM",
-    "size":327,
-    "downloadURL":""
+    "size":130,
+    "downloadURL":"https://github.com/freedom9393/dicom_to_jpg/raw/master/DCM/000000.dcm"
 },
 {
     "name":"my.owntype",
