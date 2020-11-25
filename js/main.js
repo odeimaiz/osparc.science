@@ -68,7 +68,7 @@ function populateTable(tbl, supportedFileTypes, data) {
         td2.appendChild(document.createTextNode(rowData["size"] + " B"));
 
         const results= supportedFileTypes.filter(suppFileType => suppFileType.file_type === fileType);
-        if (results) {
+        if (results.length) {
             const td3 = tr.insertCell(3);
 
             const selectList = document.createElement("select");
